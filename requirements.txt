@@ -1,0 +1,7 @@
+fastapi
+langchain
+langgraph
+uvicorn 
+pydantic
+langchain-openai
+typing
