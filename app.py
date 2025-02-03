@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn 
 from pydantic import BaseModel, Field
 from trip_planner import create_trip_planner_graph
@@ -6,7 +7,14 @@ from utils import AgentState, UserInput
 
 
 app = FastAPI(title="Singapore Personality-Based Trip Planner")
-
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Adjust this frontend's origin
+    allow_credentials=True,
+    allow_methods=["POST", "GET"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Singapore Personality-Based Trip Planner"}
