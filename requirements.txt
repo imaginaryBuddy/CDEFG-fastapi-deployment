@@ -4,6 +4,5 @@ langgraph
 uvicorn 
 pydantic
 langchain-openai
-typing
 python-dotenv
 gunicorn

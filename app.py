@@ -6,20 +6,20 @@ from trip_planner import create_trip_planner_graph
 from utils import AgentState, UserInput
 
 
-app = FastAPI(title="Singapore Personality-Based Trip Planner")
+trip_planner_app = FastAPI(title="Singapore Personality-Based Trip Planner")
 # Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Adjust this frontend's origin
-    allow_credentials=False,
-    allow_methods=["POST", "GET"],  # Allow all methods
-    allow_headers=["*"],  # Allow all headers
-)
-@app.get("/")
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # Adjust this frontend's origin
+#     allow_credentials=False,
+#     allow_methods=["POST", "GET"],  # Allow all methods
+#     allow_headers=["*"],  # Allow all headers
+# )
+@trip_planner_app.get("/")
 def read_root():
     return {"message": "Welcome to the Singapore Personality-Based Trip Planner"}
 
-@app.post("/generate_itinerary", description="Enter a user input that describes the following: \n 1. Your personality traits (e.g., 'extroverted', 'adventurous', 'organized') \n 2. Your budget ($ (0-20), $$ (20-100), $$$ (100+)) \n 3. Your interests (e.g., 'photography', 'history', 'food')   \n 4. Your energy level (high, medium, low) \n 5. Your social preference (solo, small group, large group)")
+@trip_planner_app.post("/generate_itinerary", description="Enter a user input that describes the following: \n 1. Your personality traits (e.g., 'extroverted', 'adventurous', 'organized') \n 2. Your budget ($ (0-20), $$ (20-100), $$$ (100+)) \n 3. Your interests (e.g., 'photography', 'history', 'food')   \n 4. Your energy level (high, medium, low) \n 5. Your social preference (solo, small group, large group)")
 async def generate_itinerary(user_input: UserInput):
     try:
       graph = create_trip_planner_graph()
