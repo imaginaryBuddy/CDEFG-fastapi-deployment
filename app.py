@@ -8,13 +8,13 @@ from utils import AgentState, UserInput
 
 app = FastAPI(title="Singapore Personality-Based Trip Planner")
 # Add CORS middleware
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],  # Adjust this frontend's origin
-#     allow_credentials=True,
-#     allow_methods=["POST", "GET"],  # Allow all methods
-#     allow_headers=["*"],  # Allow all headers
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Adjust this frontend's origin
+    allow_credentials=True,
+    allow_methods=["POST", "GET"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Singapore Personality-Based Trip Planner"}
@@ -47,6 +47,6 @@ async def generate_itinerary(user_input: UserInput):
         )
     
 
-# if __name__ == "__main__":
-#     uvicorn.run(app, host="0.0.0.0", port=8000)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
